@@ -10,6 +10,7 @@ services: docker
 #python: 3
 addons:
   apt:
+    update: true
     packages:
     - curl
     - python3
