@@ -77,8 +77,8 @@ jobs:
         branch: master
         condition: "$TRAVIS_PULL_REQUEST = false"
 before_cache:
-- find ~/.gradle -name '*.lock' -type f             -print0 | xargs -0 rm -v -rf "{}"
-- find ~/.gradle -name 'plugin-resolution' -type d  -print0 | xargs -0 rm -v -rf "{}"
+- find ~/.gradle -name '*.lock' -type f             -print0 | xargs -0 rm -v -rf '{}'
+- find ~/.gradle -name 'plugin-resolution' -type d  -print0 | xargs -0 rm -v -rf '{}'
 cache:
   npm: true
   packages: true
