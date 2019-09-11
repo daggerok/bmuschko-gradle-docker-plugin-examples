@@ -1,0 +1,28 @@
+{
+  "name": "bmuschko-gradle-docker-plugin-examples",
+  "version": "1.0.0",
+  "description": "Quick and fast rapid VuePress documentation development",
+  "main": "index.js",
+  "scripts": {
+    "start": "vuepress dev --port 5000 .",
+    "build": "vuepress build --no-cache .",
+    "gh-pages": "cross-env BASE_HREF='/bmuschko-gradle-docker-plugin-examples/' npm run build",
+    "test": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daggerok/bmuschko-gradle-docker-plugin-examples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/daggerok/bmuschko-gradle-docker-plugin-examples/issues"
+  },
+  "homepage": "https://github.com/daggerok/bmuschko-gradle-docker-plugin-examples#readme",
+  "devDependencies": {
+    "cross-env": "5.2.1",
+    "markdown-it-vuepress-code-snippet-enhanced": "1.0.1",
+    "vuepress": "1.0.4"
+  }
+}
