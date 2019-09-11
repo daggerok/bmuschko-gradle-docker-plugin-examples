@@ -5,6 +5,11 @@ plugins {
     id("com.github.ben-manes.versions") version "0.25.0"
 }
 
+allprojects {
+    group = "com.github.daggerok.bmuschko"
+    version = "0.0.1"
+}
+
 node {
     download = true
     version = "12.10.0"
@@ -12,7 +17,7 @@ node {
 }
 
 tasks {
-    named<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask>("dependencyUpdates") {
+    withType<com.github.benmanes.gradle.versions.updates.DependencyUpdatesTask> {
         resolutionStrategy {
             componentSelection {
                 all {

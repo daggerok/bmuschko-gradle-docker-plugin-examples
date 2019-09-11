@@ -7,11 +7,29 @@ language: java
 jdk: openjdk11
 node_js: lts/*
 install: true
+services: docker
 stages:
 - test
 - deploy
 jobs:
   include:
+  - stage: test
+    name: docker-remote-api-app gradle-docker-plugin
+    script:
+    - ./gradlew docker-remote-api-app:dockerBuild
+    - ./gradlew docker-remote-api-app:dockerStart
+    - http :8080
+    - http :8080/ktor/application/shutdown
+    - ./gradlew docker-remote-api-app:dockerRm
+  - stage: test
+    name: docker-remote-api-app
+    script:
+    - ./gradlew docker-remote-api-app:installDist
+    - bash docker-remote-api-app/install/docker-remote-api-app/bin/docker-remote-api-app &
+    - wait_for 8080
+    - http :8080
+    - http :8080/ktor/application/shutdown
+    - stop_any 80 8080
   - stage: test
     name: build
     script: ./gradlew
@@ -40,10 +58,15 @@ jobs:
       on:
         branch: master
         condition: "$TRAVIS_PULL_REQUEST = false"
+before_cache:
+- rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+- rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
   npm: true
   packages: true
   directories:
   - ./node_modules/
   - ~/.node-gyp/
+  - ~/.docker/
+  - ~/.gradle/
   - ~/.npm/

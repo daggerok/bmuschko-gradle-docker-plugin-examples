@@ -6,6 +6,14 @@ Testing bmuschko/gradle-docker-plugin (requires: java and docker) [![Build Statu
 ## VuePress docs
 
 ```bash
+./gradlew docker-remote-api-app:installDist
+./gradlew docker-remote-api-app:dockerFile
+./gradlew docker-remote-api-app:dockerBuild
+```
+
+## VuePress docs
+
+```bash
 ./gradlew npm_i
 ./gradlew npm_run_build
 npx serve .vuepress/dist/
