@@ -1,5 +1,5 @@
-# bmuschko-gradle-docker-plugin-examples [![Build Status](https://travis-ci.org/daggerok/bmuschko-gradle-docker-plugin-examples.svg?branch=master)](https://travis-ci.org/daggerok/bmuschko-gradle-docker-plugin-examples)
-Testing bmuschko/gradle-docker-plugin (requires: java and docker)
+# bmuschko-gradle-docker-plugin-examples
+Testing bmuschko/gradle-docker-plugin (requires: java and docker) [![Build Status](https://travis-ci.org/daggerok/bmuschko-gradle-docker-plugin-examples.svg?branch=master)](https://travis-ci.org/daggerok/bmuschko-gradle-docker-plugin-examples)
 
 [[toc]]
 
