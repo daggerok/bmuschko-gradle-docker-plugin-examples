@@ -6,8 +6,20 @@ git:
 language: java
 jdk: openjdk11
 node_js: lts/*
-install: true
+python: 3
 services: docker
+install: true
+addons:
+  apt:
+    packages:
+    - curl
+before_install:
+- mkdir -p $HOME/.local/bin
+- export PATH=$HOME/.local/bin:$PATH
+- pip install --user $(whoami) --upgrade pip >/dev/null
+- $(which pip) install --user $(whoami) --upgrade httpie >/dev/null
+- source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
+- stop_any 8080 80
 stages:
 - test
 - deploy
@@ -15,17 +27,21 @@ jobs:
   include:
   - stage: test
     name: docker-remote-api-app gradle-docker-plugin
+    env:
+    - secure: "cP0ayW1d9PzSkGAioAjbG3OXW76z9OKzGy9yNbawgGP5AMoqcYkn8Gso2VGv2gaAJRXztObd4vCksbyvqtfoVZ2yrm6auGSaGv/8GBdxdvYvAhfwkU780l0mUF9mifHO3CRkxEEq/G27SX5NR9bXZv/lrrVuYj58fqrlIggjVpkD2SZ9sqYk+DzFPZHb4aSOCTYXBdHPsM6Khlu9im+tm4aKz/IluDpfHX/L4ThDyEAXZ5xnzYvXbTtj2CQ26JQvemWSPXMrrGl9litqpK/iLZvnXPDUCbqCRtLtF3BKGzOBQ4FALPox3nKhn/uxUwlrgoD6ZrGMdb8lTclMNvKA+3DR0EX/rrpd0Nikv594U3WNz7RJpHSaxl7WibTjXOiXKWMNFM+ZSqZDy24jI1fHyhm0D18yrTzK9i+x0+xeJyUuAccRFzD2mtBjp0dy4q/PlSRWbY800aZD1QWYqwrzp/NMQgLDsJYOOegvQ+XEZwM9/io69R+WRkbTpvkOzT05CA+sX0Xm4LjOW8eiS/rC3CkA+SO5TarmmdxTq6h74wy8OXZrD2x+zRjD++6eGxO2Oy9mW6rEdxuiqBTEraLapzYNE1tAOGCofqQwgeuRj3+2ZG4VcDk9oDULxjpVUUT0c6TvjYn6uAYlfKg39vB+MTOGeyNeX1S8sfpx66TBLlk="
     script:
-    - ./gradlew docker-remote-api-app:dockerBuild
+    - ./gradlew docker-remote-api-app:dockerBuild -Dpassword=${DOCKER_PASSWORD}
     - ./gradlew docker-remote-api-app:dockerStart
+    - wait_for 8080
     - http :8080
     - http :8080/ktor/application/shutdown
     - ./gradlew docker-remote-api-app:dockerRm
+    - stop_any 80 8080
   - stage: test
     name: docker-remote-api-app
     script:
-    - ./gradlew docker-remote-api-app:installDist
-    - bash docker-remote-api-app/install/docker-remote-api-app/bin/docker-remote-api-app &
+    - ./gradlew clean docker-remote-api-app:installDist
+    - bash docker-remote-api-app/build/install/docker-remote-api-app/bin/docker-remote-api-app &
     - wait_for 8080
     - http :8080
     - http :8080/ktor/application/shutdown
@@ -35,7 +51,6 @@ jobs:
     script: ./gradlew
   - stage: deploy
     name: VuePress documentation deployment
-    node_js: lts/*
     script: skip
     #if: branch = "master" AND type NOT IN (pull_request)
     before_deploy:
@@ -62,6 +77,7 @@ before_cache:
 - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
 - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
 cache:
+  pip: true
   npm: true
   packages: true
   directories:
@@ -69,4 +85,5 @@ cache:
   - ~/.node-gyp/
   - ~/.docker/
   - ~/.gradle/
+  - ~/.local/
   - ~/.npm/

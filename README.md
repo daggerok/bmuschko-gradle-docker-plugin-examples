@@ -26,3 +26,9 @@ Documentation is deployed on [GitHub Pages](https://daggerok.github.io/bmuschko-
 ## resources
 
 * [Gradle Docker Plugin User Guide & Examples](https://bmuschko.github.io/gradle-docker-plugin/)
+* https://bmuschko.com/blog/docker-integration-testing/
+* https://bmuschko.com/blog/java-project-testcontainers/
+* https://bmuschko.com/blog/dockerized-spring-boot-app/
+* https://bmuschko.com/blog/asciidoctorj-extension/
+* https://bmuschko.com/blog/go-on-jenkins/
+
