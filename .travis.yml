@@ -28,7 +28,7 @@ jobs:
     - ./gradlew npm_run_gh-pages
     env:
     # travis encrypt GITHUB_TOKEN=...
-    - secure: "TBeQ/IHObOLCf8LpoKkhAM5D78UzAW4K24tB4ma4cP3jwFCdV2aPUEBAvdD3SqVeVt+qPZvpdQUnhF2FFi/xlFN2eM0J570EOPbIc1u96l/izXTASX6ogHYtSKS1QdC2Zk6fQvj4xuR2q6NcBsv87RXf7vTPROcqB+1TwrBsvz5k+xPh4SnqzwoCur/zKL3orNyz/Oe5rIZ8gXzxkzd9nqyn+cYZD4/xodWLM1GORQD3C0KDMCQ/aE/TTU7s9Dlfj2tt4h5xIEsZp0zvDgNK15GGntNcjEBCH5CHiPeFfEj76DTcTcvjoUf0uHoawpPaXGQ+8booxqdORbtsUtlKXGQWptvOr2XHbZLHAunesfQgeBKwU89b96h3iyJYiJD+3rDnydRx73Re3QuLLYGRvx6oL60hXN6G7GQL1rYiVSaT5SectMdFWbfj1X/2/S48gnsvPzAJKd2Yj7ILayjfZgYUaM65SF9bN40yNno0qxE6VDkg/4m/0fS3WLqoxz+8hY/Z/5pADRgic4/auuYluyFus18NFFdlvY1Vl/NtD0S8xz+j3LYOD+ObqSIvGc/roWZdFtHf1xEfiiAP1DtOaIs+7dXt8PWuuVTry2/wt/2SN/FqDcfzs7IbZIvGz37oZDg0mZkgYJ5lsHC9PRSybQVSB+YGFD/+eOpglSeE38Y="
+    - secure: "b9Q4j8w4R8VLoJn+5/1H1hhsgPo1dGB5PxP+3ZC6yy8K0mBhele9ng1LSuE9S7/9UFRjHzxG3FLdjF2FPeyRs86wO85TpOWtha9R7hLD5Kof1p/jI5fauoK2cSyJmDbRlZBdZvhlxnqwJ8iJrhXN98LXKaloHoZz5k7J2QqviYH4te+t/lM6L3tUKrbzONJtJXzPB0q0RCe+bzMWgGa2eYs0PlU6Cd+4PKHpqICZ1TaYv/FgzwJ3ZFnRgA15UyHmOq2YBlde9nnr2UjCqGlPN/nfvLSkupHoAVq6cAloMrheIYzit3VPN/k4SHW4cURxn7p6qZtmv23t7hMW0lzWKCo5zTuQnZx09NFC3OGau186yrd28jDi28Ifv3rGtjBzfZ/InsDKNPzXUF/SXGf+qvQqYJQm1X+AMcth1BPUDzU5Jw1noA7Tr47xbzo+dUTPB10YF8IADZGv57kHNe2jVdJQijehhcmPm5RYnlLx6wceMEAZ9JOCng+VOjLyOjucH9oLkkD/RevbreoUlKIzcgP8JIzlQsvhGwBcD+qPVAePJzLRkBpPrNs23R8b/xxmJsh20iben0zWlIgJCo0Gl2AU5Kf7zJCtIhdjU3ibXn9YsayYPEUMImu8nmfjZMCYF8eYp4O7g/LHogWUPDK/Ez19geX7NxN066QnZ070Aao="
     deploy: &pages
       provider: pages
       github-token: "$GITHUB_TOKEN"
@@ -44,4 +44,6 @@ cache:
   npm: true
   packages: true
   directories:
-  - ./node_modules
+  - ./node_modules/
+  - ~/.node-gyp/
+  - ~/.npm/
