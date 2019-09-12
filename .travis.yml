@@ -83,8 +83,9 @@ cache:
   npm: true
   packages: true
   directories:
-  - ./node_modules/
+  - node_modules/
   - ~/.node-gyp/
   - ~/.docker/
   - ~/.gradle/
+  - .gradle/
   - ~/.npm/
