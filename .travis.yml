@@ -19,8 +19,8 @@ install: true
 before_install:
 - mkdir -p $HOME/.local/bin
 - export PATH=$HOME/.local/bin:$PATH
-- $(which pip3) install --user $(whoami) --upgrade pip >/dev/null
-- $(which pip3) install --user $(whoami) --upgrade httpie >/dev/null
+- $(which pip3) install --user $(whoami) --upgrade pip
+- $(which pip3) install --user $(whoami) --upgrade httpie
 - source <(curl -s https://raw.githubusercontent.com/daggerok/bash-functions/master/main.bash)
 - stop_any 8080 80
 stages:
